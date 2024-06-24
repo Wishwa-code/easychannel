@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "98329555024",
+    "project_id": "easychanv1",
+    "storage_bucket": "easychanv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98329555024:android:2f977c6a9b98a46ae7e155",
+        "android_client_info": {
+          "package_name": "com.example.easychannel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFuvrG3mUmqnF8XHMw0pmey7v_c-k4feU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98329555024:android:e464add332c44e23e7e155",
+        "android_client_info": {
+          "package_name": "io.shuhaib.co"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFuvrG3mUmqnF8XHMw0pmey7v_c-k4feU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
