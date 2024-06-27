@@ -19,6 +19,15 @@ class _RatingPageState extends State<RatingPage> {
   String _waitingTimeMessage = '';
   int? _currentNumber;
   int? _userNumber;
+  String? _Month;
+  bool? _workingDay;
+  bool? _AM_PM;
+  int? _visitNo;
+  String? _gender;
+  bool? _mCancer;
+  bool? _sCancer;
+  String? _address;
+
 
   @override
   void initState() {
@@ -39,12 +48,21 @@ class _RatingPageState extends State<RatingPage> {
       setState(() {
         _currentNumber = data['currentNumber'];
         _userNumber = data['number'];
-        _rating = data['rating']?.toDouble() ??
-            0.0; 
+        _rating = data['rating']?.toDouble() ?? 0.0; 
+        _Month = data['Month'];
+        _workingDay = data['WorkingDay'];
+        _AM_PM = data['AM_PM'];
+        _visitNo = data['Visit.No'];
+        _gender = data['Gender'];
+        _mCancer = data['M.cancer'];
+        _sCancer = data['S.cancer'];
+        _address = data['Address'];
+        
+
       });
 
-      if (_currentNumber != 0) {
-        await _checkWaitingTime(_currentNumber!, _userNumber!);
+      if (_Month != null ) {
+        await _checkWaitingTime(_Month!, _workingDay!, _AM_PM!, _visitNo!, _gender!, _mCancer!, _sCancer!, _address);
       } else {
         _waitingTimeMessage = "No waiting time, the counter is at zero.";
       }
@@ -55,16 +73,23 @@ class _RatingPageState extends State<RatingPage> {
     setState(() => _isLoading = false);
   }
 
-  Future<void> _checkWaitingTime(int currentNumber, int userNumber) async {
+  Future<void> _checkWaitingTime(String _Month, bool _workingDay, bool _AM_PM, int _visitNo, String _gender, bool _mCancer, bool _sCancer, _address) async {
     // Call the waiting time API
+    print("calling api");
     var response = await http.post(
-      Uri.parse('http://10.0.2.2:5000/predict_waiting_time'),
+      Uri.parse('http://192.168.8.187:5000/predict_waiting_time'),
       headers: <String, String>{
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(<String, int>{
-        'current_number': currentNumber,
-        'user_number': userNumber,
+      body: jsonEncode(< String, dynamic>{
+        'month_input': _Month,
+        'working_day_input': _workingDay.toString(),
+        'am_pm_input': _AM_PM.toString(),
+        'visit_no_input': _visitNo,
+        'gender_input': _gender,
+        'm_cancer_input': _mCancer.toString(),
+        's_cancer_input': _sCancer.toString(),
+        'address_input': _address,
       }),
     );
 
@@ -91,6 +116,7 @@ class _RatingPageState extends State<RatingPage> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Rating submitted successfully')),
     );
+    
   }
 
   @override
